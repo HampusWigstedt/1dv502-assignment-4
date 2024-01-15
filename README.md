@@ -22,7 +22,7 @@ Use `./gradlew build` to build the system - this will also report errors from th
 To run the application use `./gradlew run -q --console=plain`
 
 ## Build Pipeline
-When pusing code to gitlab a build pipeline will run. This will try to build the code and then run all the tests. This is one of the main advantages of using gradle: we get a uniform and distributable way to build and test our system that can be automatically run. In our case we run gradle in a docker image build using gradle 7.3.3, jdk17 and alpine linux. 
+When pusing code to gitlab a build pipeline will run. This will try to build the code and then run all the tests. This is one of the main advantages of using gradle: we get a uniform and distributable way to build and test our system that can be automatically run. In our case we run gradle in a docker image build using gradle 8.3, jdk20 and alpine linux. 
 
 The results of the build process will be shown to you, and you can dig deeper by using the CI/CD menu in gilab. If there are any failures it is adviced to check the outputs of the respective steps and try to figure out what could be the problem. You can also inspect the test report of the automatic testing step.
 
