@@ -81,8 +81,7 @@ public class Planet extends HeavenlyBody {
    */
   @Override
   public String toString() {
-    return "  Planet: " + getName() + ", average radius " + getAvgRadiusInKm() 
-      + "km, average orbit radius " + getAvgOrbitRadiusInKm() + "km";
+    return "-" + getName() + ":" + getAvgRadiusInKm() + ":" + getAvgOrbitRadiusInKm();
   }
 
   /**

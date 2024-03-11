@@ -93,6 +93,6 @@ public class Star extends HeavenlyBody {
    */
   @Override
   public String toString() {
-    return "Star: " + getName() + ", average radius " + getAvgRadiusInKm() + "km";
+    return getName() + ":" + getAvgRadiusInKm();
   }
 }

@@ -1,10 +1,12 @@
 package assignment4.orderinheaven;
 
+import java.io.Serializable;
+
 /**
  * This abstract class represents a heavenly body in the solar system.
  * A heavenly body has a name and an average radius in kilometers.
  */
-public abstract class HeavenlyBody implements Comparable<HeavenlyBody> {
+public abstract class HeavenlyBody implements Comparable<HeavenlyBody>, Serializable {
   private String name;
   private int avgRadiusInKm;
 

@@ -4,6 +4,16 @@
 
 package assignment4;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+
 import assignment4.orderinheaven.Planet;
 import assignment4.orderinheaven.Star;
 
@@ -30,25 +40,51 @@ public class App {
     App theApp = new App();
     System.out.println(theApp.getGreeting());
 
-        // Create a new star
-        Star sun = new Star("Sun", 696340);
+    // Create a new star
+    Star sun = new Star("Sun", 696340);
 
-        // Add some planets
-        sun.addPlanet("Earth", 6371, 149.6e6);
-        sun.addPlanet("Mars", 3389, 227.9e6);
+    // Add some planets
+    sun.addPlanet("Earth", 6371, 149.6e6);
+    sun.addPlanet("Mars", 3389, 227.9e6);
 
-        // List planets
-        for (Planet planet : sun.getPlanets()) {
-            System.out.println(planet.getName());
-        }
-
-        // Delete a planet
-        sun.deletePlanet("Earth");
-
-        // List planets again
-        System.out.println("After deletion:");
-        for (Planet planet : sun.getPlanets()) {
-            System.out.println(planet.getName());
-        }
+    System.out.println(sun.toString());
+    // List planets
+    for (Planet planet : sun.getPlanets()) {
+        System.out.println(planet.toString());
     }
+
+    // Delete a planet
+    sun.deletePlanet("Earth");
+
+    // List planets again
+    System.out.println("After deletion:");
+    for (Planet planet : sun.getPlanets()) {
+        System.out.println(planet.toString());
+    }
+    System.out.println("-------------------------------------------");
+
+// Write the star to a .data file
+File file = new File("solarsystem.data");
+if (!file.exists()) {
+    try (PrintWriter out = new PrintWriter(new FileOutputStream(file))) {
+        out.println(sun.toString());
+        for (Planet planet : sun.getPlanets()) {
+            out.println(planet.toString());
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+} else {
+    System.out.println("File already exists.");
+}
+
+// Read the star from the .data file
+try (Scanner scanner = new Scanner(file)) {
+    while (scanner.hasNextLine()) {
+        System.out.println(scanner.nextLine());
+    }
+} catch (FileNotFoundException e) {
+    e.printStackTrace();
+}
+}
 }
