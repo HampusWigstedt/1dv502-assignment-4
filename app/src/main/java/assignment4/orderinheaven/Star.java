@@ -1,6 +1,7 @@
 package assignment4.orderinheaven;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents a star in the solar system.
@@ -20,6 +21,10 @@ public class Star extends HeavenlyBody {
     this.planets = new ArrayList<>();
   }
 
+      public List<Planet> getPlanets() {
+        return planets;
+    }
+
   /**
    * Adds a new planet to this star.
    *
@@ -32,6 +37,16 @@ public class Star extends HeavenlyBody {
     Planet planet = new Planet(name, avgRadiusInKm, avgOrbitRadiusInKm);
     planets.add(planet);
     return planet;
+  }
+
+  /**
+   * Deletes a planet from this star.
+   *
+   * @param name the name of the planet
+   * @return true if the planet was found and deleted, false otherwise
+   */
+  public boolean deletePlanet(String name) {
+    return planets.removeIf(planet -> planet.getName().equals(name));
   }
 
   /**

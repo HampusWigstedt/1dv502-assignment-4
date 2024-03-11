@@ -4,6 +4,9 @@
 
 package assignment4;
 
+import assignment4.orderinheaven.Planet;
+import assignment4.orderinheaven.Star;
+
 /**
  * This is the generated Hello World Greeting App.
  */
@@ -26,5 +29,26 @@ public class App {
   public static void main(String[] args) {
     App theApp = new App();
     System.out.println(theApp.getGreeting());
-  }
+
+        // Create a new star
+        Star sun = new Star("Sun", 696340);
+
+        // Add some planets
+        sun.addPlanet("Earth", 6371, 149.6e6);
+        sun.addPlanet("Mars", 3389, 227.9e6);
+
+        // List planets
+        for (Planet planet : sun.getPlanets()) {
+            System.out.println(planet.getName());
+        }
+
+        // Delete a planet
+        sun.deletePlanet("Earth");
+
+        // List planets again
+        System.out.println("After deletion:");
+        for (Planet planet : sun.getPlanets()) {
+            System.out.println(planet.getName());
+        }
+    }
 }
