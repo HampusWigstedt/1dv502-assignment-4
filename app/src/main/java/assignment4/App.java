@@ -4,18 +4,9 @@
 
 package assignment4;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.util.Scanner;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.ObjectInputStream;
-
 import assignment4.orderinheaven.Planet;
 import assignment4.orderinheaven.Star;
+import assignment4.orderinheaven.DataTransfer;
 
 /**
  * This is the generated Hello World Greeting App.
@@ -63,28 +54,9 @@ public class App {
     }
     System.out.println("-------------------------------------------");
 
-// Write the star to a .data file
-File file = new File("solarsystem.data");
-if (!file.exists()) {
-    try (PrintWriter out = new PrintWriter(new FileOutputStream(file))) {
-        out.println(sun.toString());
-        for (Planet planet : sun.getPlanets()) {
-            out.println(planet.toString());
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-} else {
-    System.out.println("File already exists.");
-}
+    
+    DataTransfer.writeToFile(sun, "solarsystem.data");
+    DataTransfer.readFromFile("solarsystem.data");
 
-// Read the star from the .data file
-try (Scanner scanner = new Scanner(file)) {
-    while (scanner.hasNextLine()) {
-        System.out.println(scanner.nextLine());
     }
-} catch (FileNotFoundException e) {
-    e.printStackTrace();
-}
-}
 }
