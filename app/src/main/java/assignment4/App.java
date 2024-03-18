@@ -32,29 +32,6 @@ public class App {
     App theApp = new App();
     System.out.println(theApp.getGreeting());
 
-    // Create a new star
-    Star sun = new Star("Sun", 696340);
-
-    // Add some planets
-    sun.addPlanet("Earth", 6371, 149.6e6);
-    sun.addPlanet("Mars", 3389, 227.9e6);
-
-    System.out.println(sun.toString());
-    // List planets
-    for (Planet planet : sun.getPlanets()) {
-        System.out.println(planet.toString());
-    }
-
-    // Delete a planet
-    sun.deletePlanet("Earth");
-
-    // List planets again
-    System.out.println("After deletion:");
-    for (Planet planet : sun.getPlanets()) {
-        System.out.println(planet.toString());
-    }
-    System.out.println("-------------------------------------------");
-
     Consoleui ui = new Consoleui();
     ui.start();
     }
