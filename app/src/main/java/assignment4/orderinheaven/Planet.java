@@ -27,6 +27,10 @@ public class Planet extends HeavenlyBody {
     this.moons = new ArrayList<>();
   }
 
+  public ArrayList<Moon> getMoons() {
+    return moons;
+  }
+
   /**
    * Adds a new moon to this planet.
    *

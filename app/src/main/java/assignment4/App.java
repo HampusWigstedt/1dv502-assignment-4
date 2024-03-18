@@ -55,10 +55,6 @@ public class App {
     }
     System.out.println("-------------------------------------------");
 
-    
-    DataTransfer.writeToFile(sun, "solarsystem.data");
-    DataTransfer.readFromFile("solarsystem.data");
-
     Consoleui ui = new Consoleui();
     ui.start();
     }
