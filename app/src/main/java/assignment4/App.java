@@ -7,6 +7,7 @@ package assignment4;
 import assignment4.orderinheaven.Planet;
 import assignment4.orderinheaven.Star;
 import assignment4.orderinheaven.DataTransfer;
+import assignment4.orderinheaven.Consoleui;
 
 /**
  * This is the generated Hello World Greeting App.
@@ -58,5 +59,7 @@ public class App {
     DataTransfer.writeToFile(sun, "solarsystem.data");
     DataTransfer.readFromFile("solarsystem.data");
 
+    Consoleui ui = new Consoleui();
+    ui.start();
     }
 }
