@@ -14,7 +14,7 @@ public class Consoleui {
         boolean running = true;
         while (running) {
             System.out.println("Please select an option:");
-            System.out.println("1. Option 1");
+            System.out.println("1. Show solar system data");
             System.out.println("2. Option 2");
             System.out.println("3. Exit");
 
@@ -23,7 +23,8 @@ public class Consoleui {
             switch (input) {
                 case "1":
                     // Handle option 1
-                    System.out.println("You selected option 1");
+                    System.out.println("Here is the solar system data:");
+                    DataTransfer.readFromFile("solarsystem.data");
                     break;
                 case "2":
                     // Handle option 2
