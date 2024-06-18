@@ -4,6 +4,7 @@
 
 package assignment4;
 
+
 /**
  * This is the generated Hello World Greeting App.
  */
@@ -26,6 +27,12 @@ public class App {
   public static void main(String[] args) {
     App theApp = new App();
     System.out.println(theApp.getGreeting());
+    Member member1 = new Member("John Doe", "john.Doe@gmail.com");
+    System.out.println(member1.getMemberID());
+    Member member2 = new Member("John Doe", "john.Doe@gmail.com");
+    System.out.println(member2.getMemberID());
+    Member member3 = new Member("John Doe", "john.Doe@gmail.com");
+    System.out.println(member3.getMemberID() + member3.getName() + member3.getEmail());
 
     }
 }
