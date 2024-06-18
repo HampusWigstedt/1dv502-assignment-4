@@ -28,11 +28,11 @@ public class App {
     App theApp = new App();
     System.out.println(theApp.getGreeting());
     Member member1 = new Member("John Doe", "john.Doe@gmail.com");
-    System.out.println(member1.getMemberID());
+    System.out.println(member1.getMemberId());
     Member member2 = new Member("John Doe", "john.Doe@gmail.com");
-    System.out.println(member2.getMemberID());
+    System.out.println(member2.getMemberId());
     Member member3 = new Member("John Doe", "john.Doe@gmail.com");
-    System.out.println(member3.getMemberID() + member3.getName() + member3.getEmail());
+    System.out.println(member3.getMemberId() + member3.getName() + member3.getEmail());
 
-    }
+  }
 }
