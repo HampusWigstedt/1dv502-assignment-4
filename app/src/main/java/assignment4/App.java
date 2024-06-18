@@ -4,11 +4,6 @@
 
 package assignment4;
 
-import assignment4.orderinheaven.Planet;
-import assignment4.orderinheaven.Star;
-import assignment4.orderinheaven.DataTransfer;
-import assignment4.orderinheaven.Consoleui;
-
 /**
  * This is the generated Hello World Greeting App.
  */
@@ -20,7 +15,7 @@ public class App {
    * @return the greeing message.
    */
   public String getGreeting() {
-    return "Hello World!!";
+    return "Hello World!";
   }
 
   /**
@@ -32,7 +27,5 @@ public class App {
     App theApp = new App();
     System.out.println(theApp.getGreeting());
 
-    Consoleui ui = new Consoleui();
-    ui.start();
     }
 }
