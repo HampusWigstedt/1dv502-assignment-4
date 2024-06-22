@@ -8,7 +8,7 @@ import java.util.Random;
 public class Member {
   private String name;
   private String email;
-  private int memberId;
+  private String memberId;
   private static final Random random = new Random();
 
   /**
@@ -18,9 +18,22 @@ public class Member {
    * @param email the email of the member
    */
   public Member(String name, String email) {
-    this.setName(name);
-    this.setEmail(email);
-    this.setMemberId();
+    this.name = name;
+    this.email = email;
+    this.memberId = generateMemberId();
+  }
+
+  /**
+   * Constructor for loading Member from file.
+   *
+   * @param name     the name of the member
+   * @param email    the email of the member
+   * @param memberId the member ID
+   */
+  public Member(String name, String email, String memberId) {
+    this.name = name;
+    this.email = email;
+    this.memberId = memberId;
   }
 
   public String getName() {
@@ -31,23 +44,23 @@ public class Member {
     return email;
   }
 
-  public int getMemberId() {
+  public String getMemberId() {
     return memberId;
   }
 
-  private void setName(String name) {
-    this.name = name;
-  }
-
-  private void setEmail(String email) {
-    this.email = email;
-  }
-
-  private void setMemberId() {
-    int min = 100000;
-    int max = 999999;
-    int memberId = random.nextInt((max - min) + 1) + min;
-    this.memberId = memberId;
+  private String generateMemberId() {
+    int leftLimit = 48; // numeral '0'
+    int rightLimit = 122; // letter 'z'
+    int targetStringLength = 6;
+    StringBuilder buffer = new StringBuilder(targetStringLength);
+    while (buffer.length() < targetStringLength) {
+      int randomLimitedInt = leftLimit + (int) 
+        (random.nextFloat() * (rightLimit - leftLimit + 1));
+      if (Character.isLetterOrDigit(randomLimitedInt)) {
+        buffer.append((char) randomLimitedInt);
+      }
+    }
+    return buffer.toString();
   }
 
   @Override
@@ -55,7 +68,7 @@ public class Member {
     return "Member{"
         + "name='" + name + '\''
         + ", email='" + email + '\''
-        + ", memberId=" + memberId
+        + ", memberId='" + memberId + '\''
         + '}';
   }
 }

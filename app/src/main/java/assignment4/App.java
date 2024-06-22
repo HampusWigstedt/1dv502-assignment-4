@@ -25,14 +25,7 @@ public class App {
    * @param args Unused program arguments.
    */
   public static void main(String[] args) {
-    App theApp = new App();
-    System.out.println(theApp.getGreeting());
-    Member member1 = new Member("John Doe", "john.Doe@gmail.com");
-    System.out.println(member1.getMemberId());
-    Member member2 = new Member("John Doe", "john.Doe@gmail.com");
-    System.out.println(member2.getMemberId());
-    Member member3 = new Member("John Doe", "john.Doe@gmail.com");
-    System.out.println(member3.getMemberId() + member3.getName() + member3.getEmail());
-
+    BoatClubApp app = new BoatClubApp();
+    app.start();
   }
 }
