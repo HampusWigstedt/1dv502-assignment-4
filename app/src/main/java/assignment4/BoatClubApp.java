@@ -1,5 +1,9 @@
 package assignment4;
 
+/**
+ * This class serves as the entry point for the Boat Club application.
+ * It initializes the application's components and starts the user interface.
+ */
 public class BoatClubApp {
   private Registry registry;
   private BoatClubInterface boatClubInterface;

@@ -1,17 +1,29 @@
 package assignment4;
 
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
+/**
+ * This class represents the user interface for the Boat Club application.
+ * It handles user interactions and commands for managing members and their boats.
+ */
 public class BoatClubInterface {
   private Registry registry;
   private Scanner scanner;
 
+  /**
+   * Constructs a new BoatClubInterface instance with the specified registry.
+   *
+   * @param registry The registry to be used by this interface.
+   */
   public BoatClubInterface(Registry registry) {
     this.registry = registry;
     this.scanner = new Scanner(System.in);
   }
 
+  /**
+   * Starts the user interface loop, allowing the user to interact with the registry.
+   */
   public void run() {
     loadRegistry();
     boolean running = true;
