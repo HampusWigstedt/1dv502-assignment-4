@@ -1,6 +1,7 @@
 package assignment4;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -17,8 +18,8 @@ public class BoatClubInterface {
    * @param registry The registry to be used by this interface.
    */
   public BoatClubInterface(Registry registry) {
-    this.registry = registry;
-    this.scanner = new Scanner(System.in);
+    this.registry = new Registry();
+    this.scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
   }
 
   /**
