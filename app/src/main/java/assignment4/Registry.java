@@ -81,7 +81,8 @@ public class Registry {
       throw new IOException("Failed to create new file: " + filename);
     }
 
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+    try (BufferedReader br = new BufferedReader(
+        new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
       String line;
       Member currentMember = null;
       while ((line = br.readLine()) != null) {
@@ -107,7 +108,8 @@ public class Registry {
   * @throws IOException If an I/O error occurs.
   */
   public void saveToFile(String filename) throws IOException {
-    try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
+    try (BufferedWriter bw = new BufferedWriter(
+        new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8))) {
       for (Member member : members) {
         bw.write(String.format("MEMBER:%s:%s:%s", member.getName(), member.getEmail(), member.getMemberId()));
         bw.newLine();

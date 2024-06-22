@@ -55,7 +55,7 @@ public class Member {
     StringBuilder buffer = new StringBuilder(targetStringLength);
     while (buffer.length() < targetStringLength) {
       int randomLimitedInt = leftLimit + (int) 
-        (random.nextFloat() * (rightLimit - leftLimit + 1));
+          (random.nextFloat() * (rightLimit - leftLimit + 1));
       if (Character.isLetterOrDigit(randomLimitedInt)) {
         buffer.append((char) randomLimitedInt);
       }
