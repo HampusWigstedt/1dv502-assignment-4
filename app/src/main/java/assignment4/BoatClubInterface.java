@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
 /**
  * This class represents the user interface for the Boat Club application.
  * It handles user interactions and commands for managing members and their boats.
@@ -97,8 +98,8 @@ public class BoatClubInterface {
   private void addNewBoat(String memberId) {
     Member member = registry.findMemberById(memberId);
     if (member == null) {
-        System.out.println("Member not found.");
-        return;
+      System.out.println("Member not found.");
+      return;
     }
     System.out.print("Enter boat name: ");
     String name = scanner.nextLine();
@@ -110,49 +111,49 @@ public class BoatClubInterface {
 
     Boat boat = null;
     switch (type.toLowerCase()) {
-        case "sailboat":
-            System.out.print("Enter sail depth: ");
-            double depth = scanner.nextDouble();
-            scanner.nextLine(); // consume newline
-            boat = new Sailboat(name, length, depth);
-            break;
-        case "motorboat":
-            System.out.print("Enter engine power (hp): ");
-            double enginePower = scanner.nextDouble();
-            scanner.nextLine(); // consume newline
-            boat = new Motorboat(name, length, enginePower);
-            break;
-        case "motorsailer":
-            System.out.print("Enter sail depth: ");
-            depth = scanner.nextDouble();
-            System.out.print("Enter engine power (hp): ");
-            enginePower = scanner.nextDouble();
-            scanner.nextLine(); // consume newline
-            boat = new Motorsailer(name, length, depth, enginePower);
-            break;
-        case "canoe":
-            boat = new Canoe(name, length);
-            break;
-        default:
-            System.out.println("Invalid boat type. Please try again.");
-            return;
+      case "sailboat":
+        System.out.print("Enter sail depth: ");
+        double depth = scanner.nextDouble();
+        scanner.nextLine(); // consume newline
+        boat = new SailboatBoat(name, length, depth);
+        break;
+      case "motorboat":
+        System.out.print("Enter engine power (hp): ");
+        double enginePower = scanner.nextDouble();
+        scanner.nextLine(); // consume newline
+        boat = new MotorboatBoat(name, length, enginePower);
+        break;
+      case "motorsailer":
+        System.out.print("Enter sail depth: ");
+        depth = scanner.nextDouble();
+        System.out.print("Enter engine power (hp): ");
+        enginePower = scanner.nextDouble();
+        scanner.nextLine(); // consume newline
+        boat = new MotorsailerBoat(name, length, depth, enginePower);
+        break;
+      case "canoe":
+        boat = new CanoeBoat(name, length);
+        break;
+      default:
+        System.out.println("Invalid boat type. Please try again.");
+        return;
     }
 
     if (boat != null) {
-        member.addBoat(boat);
-        System.out.println("Boat added successfully.");
+      member.addBoat(boat);
+      System.out.println("Boat added successfully.");
     }
-}
+  }
 
-// Step 2: Modify the memberMenu method to include an option to add a new boat
-private void memberMenu(String memberId) {
-  Member member = registry.findMemberById(memberId);
-  if (member == null) {
+  // Step 2: Modify the memberMenu method to include an option to add a new boat
+  private void memberMenu(String memberId) {
+    Member member = registry.findMemberById(memberId);
+    if (member == null) {
       System.out.println("Member not found.");
       return;
-  }
-  boolean running = true;
-  while (running) {
+    }
+    boolean running = true;
+    while (running) {
       System.out.println("---------------------------------------------------------------");
       System.out.println("1. View member details");
       System.out.println("2. Edit member");
@@ -165,26 +166,26 @@ private void memberMenu(String memberId) {
       scanner.nextLine(); // consume newline
       
       switch (choice) {
-          case 1:
-              viewMemberDetails(memberId);
-              break;
-          case 2:
-              // Implement editMember method
-              break;
-          case 3:
-              deleteMember(member); // Call deleteMember with the Member object
-              break;
-          case 4:
-              addNewBoat(memberId); // Call addNewBoat with the memberId
-              break;
-          case 5:
-              running = false;
-              break;
-          default:
-              System.out.println("Invalid choice. Please try again.");
+        case 1:
+          viewMemberDetails(memberId);
+          break;
+        case 2:
+          // Implement editMember method
+          break;
+        case 3:
+          deleteMember(member); // Call deleteMember with the Member object
+          break;
+        case 4:
+          addNewBoat(memberId); // Call addNewBoat with the memberId
+          break;
+        case 5:
+          running = false;
+          break;
+        default:
+          System.out.println("Invalid choice. Please try again.");
       }
+    }
   }
-}
 
   private void deleteMember(Member member) {
     System.out.println("Are you sure you want to delete " + member.getName() + "? (yes/no)");
@@ -201,29 +202,30 @@ private void memberMenu(String memberId) {
   private void viewMemberDetails(String memberId) {
     Member member = registry.findMemberById(memberId);
     if (member != null) {
-        System.out.println("Name: " + member.getName());
-        System.out.println("Email: " + member.getEmail());
-        System.out.println("Boats:");
-        for (Boat boat : member.getBoats()) {
-            String boatDetails = "Boat Name: " + boat.getName() + ", Length: " + boat.getLength();
-            if (boat instanceof Sailboat) {
-                boatDetails += ", Type: Sailboat, Sail Depth: " + ((Sailboat) boat).getSailDepth();
-            } else if (boat instanceof Motorboat) {
-                boatDetails += ", Type: Motorboat, Engine Power: " + ((Motorboat) boat).getEnginePower();
-            } else if (boat instanceof Motorsailer) {
-                Motorsailer motorsailer = (Motorsailer) boat;
-                boatDetails += ", Type: Motorsailer, Sail Depth: " + motorsailer.getSailDepth() + ", Engine Power: " + motorsailer.getEnginePower();
-            } else if (boat instanceof Canoe) {
-                boatDetails += ", Type: Canoe";
-            } else {
-                boatDetails += ", Type: Unknown";
-            }
-            System.out.println(boatDetails);
+      System.out.println("Name: " + member.getName());
+      System.out.println("Email: " + member.getEmail());
+      System.out.println("Boats:");
+      for (Boat boat : member.getBoats()) {
+        String boatDetails = "Boat Name: " + boat.getName() + ", Length: " + boat.getLength();
+        if (boat instanceof SailboatBoat) {
+          boatDetails += ", Type: Sailboat, Sail Depth: " + ((SailboatBoat) boat).getSailDepth();
+        } else if (boat instanceof MotorboatBoat) {
+          boatDetails += ", Type: Motorboat, Engine Power: " + ((MotorboatBoat) boat).getEnginePower();
+        } else if (boat instanceof MotorsailerBoat) {
+          MotorsailerBoat motorsailer = (MotorsailerBoat) boat;
+          boatDetails += ", Type: Motorsailer, Sail Depth: " + motorsailer.getSailDepth()
+            + ", Engine Power: " + motorsailer.getEnginePower();
+        } else if (boat instanceof CanoeBoat) {
+          boatDetails += ", Type: Canoe";
+        } else {
+          boatDetails += ", Type: Unknown";
         }
+        System.out.println(boatDetails);
+      }
     } else {
-        System.out.println("Member not found.");
+      System.out.println("Member not found.");
     }
-}
+  }
 
   private void loadRegistry() {
     try {

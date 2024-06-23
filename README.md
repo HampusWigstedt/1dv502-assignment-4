@@ -30,5 +30,4 @@ The results of the build process will be shown to you, and you can dig deeper by
 If you have already worked on the task in whole or part using your own gradle setup we reccomend that you copy only the source code files into this structure. Your source code should be copied into the `app/src/main/java/` folder and you can change the `application` `mainClass` in `build.gradle` accordingly.
 
 
-Problem med att meny inte visar med kod längst upp i consoleui.
-
+Försöker flytta ut de olika klasserna för båtar men lyckas inte få dem att funka...

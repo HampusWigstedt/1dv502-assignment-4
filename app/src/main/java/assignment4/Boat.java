@@ -1,93 +1,94 @@
 package assignment4;
 
-// Abstract Boat class
 abstract class Boat {
-    protected String name;
-    protected double length;
+  protected String name;
+  protected double length;
 
-    public Boat(String name, double length) {
-        this.name = name;
-        this.length = length;
-    }
+  public Boat(String name, double length) {
+    this.name = name;
+    this.length = length;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public double getLength() {
-        return length;
-    }
+  public double getLength() {
+    return length;
+  }
 
-    public abstract String getDetails();
+  public abstract String getDetails();
 }
 
-class Sailboat extends Boat {
-    private double depth;
 
-    public Sailboat(String name, double length, double depth) {
-        super(name, length);
-        this.depth = depth;
-    }
+// class Sailboat extends Boat {
+//   protected double depth;
 
-    public double getSailDepth() {
-        return depth;
-    }
+//   public Sailboat(String name, double length, double depth) {
+//     super(name, length);
+//     this.depth = depth;
+//   }
 
-    @Override
-    public String getDetails() {
-        return String.format("BOAT:%s:sailboat:%.0f:%.0f", name, length, depth);
-    }
-}
+//   public double getSailDepth() {
+//     return depth;
+//   }
 
-class Motorboat extends Boat {
-    private double enginePower;
+//   @Override
+//   public String getDetails() {
+//     return String.format("BOAT:%s:sailboat:%.0f:%.0f", name, length, depth);
+//   }
+// }
 
-    public Motorboat(String name, double length, double enginePower) {
-        super(name, length);
-        this.enginePower = enginePower;
-    }
+// class Motorsailer extends Boat {
+//   private double depth;
+//   private double enginePower;
 
-    public double getEnginePower() {
-        return enginePower;
-    }
+//   public Motorsailer(String name, double length, double depth, double enginePower) {
+//     super(name, length);
+//     this.depth = depth;
+//     this.enginePower = enginePower;
+//   }
 
-    @Override
-    public String getDetails() {
-        return String.format("BOAT:%s:motorboat:%.0f:%.0f", name, length, enginePower);
-    }
-}
+//   public double getSailDepth() {
+//     return depth;
+//   }
 
-class Motorsailer extends Boat {
-    private double depth;
-    private double enginePower;
+//   public double getEnginePower() {
+//     return enginePower;
+//   }
 
-    public Motorsailer(String name, double length, double depth, double enginePower) {
-        super(name, length);
-        this.depth = depth;
-        this.enginePower = enginePower;
-    }
+//   @Override
+//   public String getDetails() {
+//     return String.format("BOAT:%s:motorsailer:%.0f:%.0f:%.0f", name, length, depth, enginePower);
+//   }
+// }
 
-    public double getSailDepth() {
-        return depth;
-    }
+// class Motorboat extends Boat {
+//   private double enginePower;
+  
+//   public Motorboat(String name, double length, double enginePower) {
+//     super(name, length);
+//     this.enginePower = enginePower;
+//   }
+  
+//   public double getEnginePower() {
+//     return enginePower;
+//   }
+  
+//   @Override
+//   public String getDetails() {
+//     return String.format("BOAT:%s:motorboat:%.0f:%.0f", name, length, enginePower);
+//   }
+// }
 
-    public double getEnginePower() {
-        return enginePower;
-    }
+// class Canoe extends Boat {
+//   public Canoe(String name, double length) {
+//     super(name, length);
+//   }
+  
+//   @Override
+//   public String getDetails() {
+//     return String.format("BOAT:%s:canoe:%.0f", name, length);
+//   }
+// }
 
-    @Override
-    public String getDetails() {
-        return String.format("BOAT:%s:motorsailer:%.0f:%.0f:%.0f", name, length, depth, enginePower);
-    }
-}
-
-class Canoe extends Boat {
-    public Canoe(String name, double length) {
-        super(name, length);
-    }
-
-    @Override
-    public String getDetails() {
-        return String.format("BOAT:%s:canoe:%.0f", name, length);
-    }
-}

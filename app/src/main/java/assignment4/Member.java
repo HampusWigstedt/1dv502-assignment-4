@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Member class.
  */
@@ -87,11 +88,11 @@ public class Member {
     for (Boat boat : boats) {
       boatsDetails.append(boat.getDetails()).append("\n");
     }
-    return "Member{" +
-        "name='" + name + '\'' +
-        ", email='" + email + '\'' +
-        ", memberId='" + memberId + '\'' +
-        ", boats=" + boatsDetails + // Display details of each boat
+    return "Member{"
+        + "name='" + name + '\''
+        + ", email='" + email + '\''
+        + ", memberId='" + memberId + '\''
+        + ", boats=" + boatsDetails + // Display details of each boat
         '}';
   }
 }
