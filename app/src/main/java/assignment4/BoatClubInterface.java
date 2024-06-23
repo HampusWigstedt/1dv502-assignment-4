@@ -91,38 +91,49 @@ private void listMembers() {
 }
 
 private void memberMenu(String memberId) {
-    Member member = registry.findMemberById(memberId);
-    if (member == null) {
-        System.out.println("Member not found.");
-        return;
-    }
-    boolean running = true;
-    while (running) {
-        System.out.println("1. View member details");
-        System.out.println("2. Edit member");
-        System.out.println("3. Delete member");
-        System.out.println("4. Return to list members");
-        
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
-        
-        switch (choice) {
-            case 1:
-                viewMemberDetails(memberId);
-                break;
-            case 2:
-                // Implement editMember method
-                break;
-            case 3:
-                // Implement deleteMember method
-                break;
-            case 4:
-                running = false;
-                break;
-            default:
-                System.out.println("Invalid choice. Please try again.");
-        }
-    }
+  Member member = registry.findMemberById(memberId);
+  if (member == null) {
+      System.out.println("Member not found.");
+      return;
+  }
+  boolean running = true;
+  while (running) {
+      System.out.println("1. View member details");
+      System.out.println("2. Edit member");
+      System.out.println("3. Delete member");
+      System.out.println("4. Return to list members");
+      
+      int choice = scanner.nextInt();
+      scanner.nextLine(); // consume newline
+      
+      switch (choice) {
+          case 1:
+              viewMemberDetails(memberId);
+              break;
+          case 2:
+              // Implement editMember method
+              break;
+          case 3:
+              deleteMember(member); // Call deleteMember with the Member object
+              break;
+          case 4:
+              running = false;
+              break;
+          default:
+              System.out.println("Invalid choice. Please try again.");
+      }
+  }
+}
+
+private void deleteMember(Member member) {
+  System.out.println("Are you sure you want to delete " + member.getName() + "? (yes/no)");
+  String confirmation = scanner.nextLine();
+  if ("yes".equalsIgnoreCase(confirmation)) {
+      registry.removeMember(member); // Use the removeMember method from Registry
+      System.out.println("Member deleted successfully.");
+  } else {
+      System.out.println("Member deletion cancelled.");
+  }
 }
 
 // Modify viewMemberDetails to accept memberId as parameter
