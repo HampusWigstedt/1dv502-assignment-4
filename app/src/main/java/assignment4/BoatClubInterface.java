@@ -156,7 +156,7 @@ public class BoatClubInterface {
     while (running) {
       System.out.println("---------------------------------------------------------------");
       System.out.println("1. View member details");
-      System.out.println("2. Edit member");
+      System.out.println("2. Edit Boats");
       System.out.println("3. Delete member");
       System.out.println("4. Add new boat");
       System.out.println("5. Return to list members");
@@ -170,7 +170,7 @@ public class BoatClubInterface {
           viewMemberDetails(memberId);
           break;
         case 2:
-          // Implement editMember method
+          deleteBoat(memberId);
           break;
         case 3:
           deleteMember(member); // Call deleteMember with the Member object
@@ -195,6 +195,38 @@ public class BoatClubInterface {
       System.out.println("Member deleted successfully.");
     } else {
       System.out.println("Member deletion cancelled.");
+    }
+  }
+
+  private void deleteBoat(String memberId) {
+    Member member = registry.findMemberById(memberId);
+    if (member == null) {
+      System.out.println("Member not found.");
+      return;
+    }
+    if (member.getBoats().isEmpty()) {
+      System.out.println("This member has no boats.");
+      return;
+    }
+    System.out.println("Select a boat to delete:");
+    int index = 1;
+    for (Boat boat : member.getBoats()) {
+      System.out.println(index++ + ". " + boat.getName() + " (" + boat.getLength() + " meters)");
+    }
+    int choice = scanner.nextInt();
+    scanner.nextLine(); // consume newline
+    if (choice < 1 || choice > member.getBoats().size()) {
+      System.out.println("Invalid choice. Please try again.");
+      return;
+    }
+    Boat boatToDelete = member.getBoats().get(choice - 1);
+    System.out.println("Are you sure you want to delete " + boatToDelete.getName() + "? (yes/no)");
+    String confirmation = scanner.nextLine();
+    if ("yes".equalsIgnoreCase(confirmation)) {
+      member.removeBoat(boatToDelete);
+      System.out.println("Boat deleted successfully.");
+    } else {
+      System.out.println("Boat deletion cancelled.");
     }
   }
 

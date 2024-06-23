@@ -68,6 +68,10 @@ public class Member {
     return Collections.unmodifiableList(boats);
   }
 
+  public boolean removeBoat(Boat boat) {
+    return boats.remove(boat);
+  }
+
   private String generateMemberId() {
     int leftLimit = 48; // numeral '0'
     int rightLimit = 122; // letter 'z'
