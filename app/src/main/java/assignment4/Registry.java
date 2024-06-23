@@ -113,11 +113,12 @@ public class Registry {
       for (Member member : members) {
         bw.write(String.format("MEMBER:%s:%s:%s", member.getName(), member.getEmail(), member.getMemberId()));
         bw.newLine();
-        // For each boat, add logic to write boat details
-        // for (Boat boat : member.getBoats()) {
-        //   bw.write("BOAT:" + boat.getDetails());
-        //   bw.newLine();
-        // }
+        // Iterate over each boat of the member
+        for (Boat boat : member.getBoats()) {
+          // Assuming getDetails() returns a string like "Type:Length"
+          bw.write("BOAT:" + boat.getDetails());
+          bw.newLine();
+        }
       }
     }
   }

@@ -90,40 +90,76 @@ public class BoatClubInterface {
     }
   }
 
-  private void memberMenu(String memberId) {
-    Member member = registry.findMemberById(memberId);
-    if (member == null) {
+  // Step 1: Implement the addNewBoat method
+private void addNewBoat(String memberId) {
+  Member member = registry.findMemberById(memberId);
+  if (member == null) {
       System.out.println("Member not found.");
       return;
-    }
-    boolean running = true;
-    while (running) {
+  }
+  System.out.print("Enter boat name: ");
+  String name = scanner.nextLine();
+  System.out.print("Enter boat type (sailboat, motorboat, motorsailer, canoe): ");
+  String type = scanner.nextLine();
+  Boat.Type boatType;
+  try {
+      boatType = Boat.Type.valueOf(type.toUpperCase());
+  } catch (IllegalArgumentException e) {
+      System.out.println("Invalid boat type. Please try again.");
+      return;
+  }
+  // Assuming different information is needed based on the boat type,
+  // you might ask for additional details here. For simplicity, let's assume
+  // each boat type requires a length.
+  System.out.print("Enter boat length: ");
+  double length = scanner.nextDouble();
+  scanner.nextLine(); // consume newline
+
+  // Create a new Boat object and add it to the member
+  Boat boat = new Boat(name, boatType, length);
+  member.addBoat(boat);
+  System.out.println("Boat added successfully.");
+}
+
+// Step 2: Modify the memberMenu method to include an option to add a new boat
+private void memberMenu(String memberId) {
+  Member member = registry.findMemberById(memberId);
+  if (member == null) {
+      System.out.println("Member not found.");
+      return;
+  }
+  boolean running = true;
+  while (running) {
       System.out.println("1. View member details");
       System.out.println("2. Edit member");
       System.out.println("3. Delete member");
-      System.out.println("4. Return to list members");
+      System.out.println("4. Add new boat");
+      System.out.println("5. Return to list members");
       
       int choice = scanner.nextInt();
       scanner.nextLine(); // consume newline
       
       switch (choice) {
-        case 1:
-          viewMemberDetails(memberId);
-          break;
-        case 2:
-          // Implement editMember method
-          break;
-        case 3:
-          deleteMember(member); // Call deleteMember with the Member object
-          break;
-        case 4:
-          running = false;
-          break;
-        default:
-          System.out.println("Invalid choice. Please try again.");
+          case 1:
+              viewMemberDetails(memberId);
+              break;
+          case 2:
+              // Implement editMember method
+              break;
+          case 3:
+              deleteMember(member); // Call deleteMember with the Member object
+              break;
+          case 4:
+              addNewBoat(memberId); // Call addNewBoat with the memberId
+              break;
+          case 5:
+              running = false;
+              break;
+          default:
+              System.out.println("Invalid choice. Please try again.");
       }
-    }
   }
+}
 
   private void deleteMember(Member member) {
     System.out.println("Are you sure you want to delete " + member.getName() + "? (yes/no)");
@@ -140,14 +176,16 @@ public class BoatClubInterface {
   private void viewMemberDetails(String memberId) {
     Member member = registry.findMemberById(memberId);
     if (member != null) {
-      System.out.println("Name: " + member.getName());
-      System.out.println("Email: " + member.getEmail());
-      System.out.println("Boats:");
-      // List boats logic
+        System.out.println("Name: " + member.getName());
+        System.out.println("Email: " + member.getEmail());
+        System.out.println("Boats:");
+        for (Boat boat : member.getBoats()) { // Assuming Member class has a getBoats method returning a list of boats
+            System.out.println("Boat Name: " + boat.getName() + ", Type: " + boat.getType() + ", Length: " + boat.getLength());
+        }
     } else {
-      System.out.println("Member not found.");
+        System.out.println("Member not found.");
     }
-  }
+}
 
   private void loadRegistry() {
     try {

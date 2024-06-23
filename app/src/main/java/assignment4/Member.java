@@ -1,5 +1,7 @@
 package assignment4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -9,6 +11,7 @@ public class Member {
   private String name;
   private String email;
   private String memberId;
+  private List<Boat> boats; // Attribute to store boats
   private static final Random random = new Random();
 
   /**
@@ -21,6 +24,7 @@ public class Member {
     this.name = name;
     this.email = email;
     this.memberId = generateMemberId();
+    this.boats = new ArrayList<>(); // Initialize the list of boats
   }
 
   /**
@@ -34,6 +38,7 @@ public class Member {
     this.name = name;
     this.email = email;
     this.memberId = memberId;
+    this.boats = new ArrayList<>(); // Initialize the list of boats
   }
 
   public String getName() {
@@ -46,6 +51,14 @@ public class Member {
 
   public String getMemberId() {
     return memberId;
+  }
+
+    public void addBoat(Boat boat) {
+    this.boats.add(boat);
+  }
+
+  public List<Boat> getBoats() {
+    return boats;
   }
 
   private String generateMemberId() {
