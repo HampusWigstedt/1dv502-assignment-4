@@ -11,7 +11,7 @@ public class Member {
   private String name;
   private String email;
   private String memberId;
-  private List<Boat> boats; // Attribute to store boats
+  private List<Boat> boats; // Attribute to store multiple boats
   private static final Random random = new Random();
 
   /**
@@ -53,8 +53,14 @@ public class Member {
     return memberId;
   }
 
-    public void addBoat(Boat boat) {
+  public void addBoat(Boat boat) {
     this.boats.add(boat);
+  }
+
+  // Method to initiate and add a new Boat to the member's list of boats
+  public void initiateAndAddBoat(String name, Boat.Type type, double length) {
+    Boat newBoat = new Boat(name, type, length);
+    this.boats.add(newBoat);
   }
 
   public List<Boat> getBoats() {
@@ -78,10 +84,11 @@ public class Member {
 
   @Override
   public String toString() {
-    return "Member{"
-        + "name='" + name + '\''
-        + ", email='" + email + '\''
-        + ", memberId='" + memberId + '\''
-        + '}';
+    return "Member{" +
+        "name='" + name + '\'' +
+        ", email='" + email + '\'' +
+        ", memberId='" + memberId + '\'' +
+        ", boats=" + boats.size() + // Display the number of boats
+        '}';
   }
 }

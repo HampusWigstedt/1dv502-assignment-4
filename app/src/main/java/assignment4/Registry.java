@@ -80,7 +80,7 @@ public class Registry {
     if (!file.exists() && !file.createNewFile()) {
       throw new IOException("Failed to create new file: " + filename);
     }
-
+  
     try (BufferedReader br = new BufferedReader(
         new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
       String line;
@@ -92,11 +92,17 @@ public class Registry {
           currentMember = new Member(parts[1], email, parts[3]);
           addMember(currentMember);
         } else if (line.startsWith("BOAT:") && currentMember != null) {
-          // Add logic to create the correct boat type and add to the current member
-          // For example:
-          // Boat boat = new Boat(parts[1], parts[2], other parts...);
-          // currentMember.addBoat(boat);
-        }
+          String[] parts = line.split(":");
+          // Assuming the boat details are saved as "BOAT:name:type:length"
+          if (parts.length >= 4) {
+              String name = parts[1];
+              Boat.Type type = Boat.Type.valueOf(parts[2].toUpperCase());
+              String lengthStr = parts[3].replace(",", "."); // Replace comma with dot
+              double length = Double.parseDouble(lengthStr);
+              Boat boat = new Boat(name, type, length); // Adjust constructor as needed
+              currentMember.addBoat(boat);
+          }
+      }
       }
     }
   }
