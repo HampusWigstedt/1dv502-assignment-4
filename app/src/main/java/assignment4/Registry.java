@@ -89,7 +89,7 @@ public class Registry {
         if (line.startsWith("MEMBER:")) {
           String[] parts = line.split(":");
           if (parts.length >= 4) { // Ensure there are enough parts for a member
-            String email = parts.length > 2 ? parts[2] : null;
+            String email = parts[2]; // Directly assign without redundant check
             currentMember = new Member(parts[1], email, parts[3]);
             addMember(currentMember);
           }

@@ -1,6 +1,7 @@
 package assignment4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -64,7 +65,7 @@ public class Member {
   }
 
   public List<Boat> getBoats() {
-    return boats;
+    return Collections.unmodifiableList(boats);
   }
 
   private String generateMemberId() {
