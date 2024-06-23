@@ -78,34 +78,62 @@ public class Registry {
   public void loadFromFile(String filename) throws IOException {
     File file = new File(filename);
     if (!file.exists() && !file.createNewFile()) {
-      throw new IOException("Failed to create new file: " + filename);
+        throw new IOException("Failed to create new file: " + filename);
     }
-  
+
     try (BufferedReader br = new BufferedReader(
-        new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
-      String line;
-      Member currentMember = null;
-      while ((line = br.readLine()) != null) {
-        if (line.startsWith("MEMBER:")) {
-          String[] parts = line.split(":");
-          String email = parts.length > 2 ? parts[2] : null;
-          currentMember = new Member(parts[1], email, parts[3]);
-          addMember(currentMember);
-        } else if (line.startsWith("BOAT:") && currentMember != null) {
-          String[] parts = line.split(":");
-          // Assuming the boat details are saved as "BOAT:name:type:length"
-          if (parts.length >= 4) {
-              String name = parts[1];
-              Boat.Type type = Boat.Type.valueOf(parts[2].toUpperCase());
-              String lengthStr = parts[3].replace(",", "."); // Replace comma with dot
-              double length = Double.parseDouble(lengthStr);
-              Boat boat = new Boat(name, type, length); // Adjust constructor as needed
-              currentMember.addBoat(boat);
-          }
-      }
-      }
+            new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+        String line;
+        Member currentMember = null;
+        while ((line = br.readLine()) != null) {
+            if (line.startsWith("MEMBER:")) {
+                String[] parts = line.split(":");
+                if (parts.length >= 4) { // Ensure there are enough parts for a member
+                    String email = parts.length > 2 ? parts[2] : null;
+                    currentMember = new Member(parts[1], email, parts[3]);
+                    addMember(currentMember);
+                }
+            } else if (line.startsWith("BOAT:") && currentMember != null) {
+                String[] parts = line.split(":");
+                try {
+                    if (parts.length >= 4) { // Common validation for all boats
+                        String name = parts[1];
+                        String type = parts[2].toLowerCase(); // Convert type to lowercase for case-insensitive comparison
+                        double length = Double.parseDouble(parts[3]);
+                        switch (type) {
+                            case "sailboat":
+                                if (parts.length >= 5) {
+                                    double depth = Double.parseDouble(parts[4]);
+                                    currentMember.addBoat(new Sailboat(name, length, depth));
+                                }
+                                break;
+                            case "motorboat":
+                                if (parts.length >= 5) {
+                                    double enginePower = Double.parseDouble(parts[4]);
+                                    currentMember.addBoat(new Motorboat(name, length, enginePower));
+                                }
+                                break;
+                            case "motorsailer":
+                                if (parts.length >= 6) {
+                                    double depth = Double.parseDouble(parts[4]);
+                                    double enginePower = Double.parseDouble(parts[5]);
+                                    currentMember.addBoat(new Motorsailer(name, length, depth, enginePower));
+                                }
+                                break;
+                            case "canoe":
+                                currentMember.addBoat(new Canoe(name, length));
+                                break;
+                            default:
+                                System.err.println("Unsupported boat type: " + type);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Error parsing boat details: " + line);
+                }
+            }
+        }
     }
-  }
+}
 
   /**
   * Saves members and their boats to a file.
@@ -119,10 +147,9 @@ public class Registry {
       for (Member member : members) {
         bw.write(String.format("MEMBER:%s:%s:%s", member.getName(), member.getEmail(), member.getMemberId()));
         bw.newLine();
-        // Iterate over each boat of the member
         for (Boat boat : member.getBoats()) {
-          // Assuming getDetails() returns a string like "Type:Length"
-          bw.write("BOAT:" + boat.getDetails());
+          // Updated to use getDetails() for saving boat information
+          bw.write(boat.getDetails());
           bw.newLine();
         }
       }

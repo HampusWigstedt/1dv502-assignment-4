@@ -58,9 +58,8 @@ public class Member {
   }
 
   // Method to initiate and add a new Boat to the member's list of boats
-  public void initiateAndAddBoat(String name, Boat.Type type, double length) {
-    Boat newBoat = new Boat(name, type, length);
-    this.boats.add(newBoat);
+  public void initiateAndAddBoat(Boat boat) {
+    this.boats.add(boat);
   }
 
   public List<Boat> getBoats() {
@@ -84,11 +83,15 @@ public class Member {
 
   @Override
   public String toString() {
+    StringBuilder boatsDetails = new StringBuilder();
+    for (Boat boat : boats) {
+      boatsDetails.append(boat.getDetails()).append("\n");
+    }
     return "Member{" +
         "name='" + name + '\'' +
         ", email='" + email + '\'' +
         ", memberId='" + memberId + '\'' +
-        ", boats=" + boats.size() + // Display the number of boats
+        ", boats=" + boatsDetails + // Display details of each boat
         '}';
   }
 }

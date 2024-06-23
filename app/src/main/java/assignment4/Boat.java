@@ -1,49 +1,93 @@
 package assignment4;
 
-public class Boat {
-    private String name;
-    private Type type;
-    private double length;
+// Abstract Boat class
+abstract class Boat {
+    protected String name;
+    protected double length;
 
-    // Enum to represent boat types
-    public enum Type {
-        SAILBOAT, MOTORBOAT, MOTORSAILER, CANOE
-    }
-
-    // Constructor
-    public Boat(String name, Type type, double length) {
+    public Boat(String name, double length) {
         this.name = name;
-        this.type = type;
         this.length = length;
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 
     public double getLength() {
         return length;
     }
 
-    public void setLength(double length) {
-        this.length = length;
+    public abstract String getDetails();
+}
+
+class Sailboat extends Boat {
+    private double depth;
+
+    public Sailboat(String name, double length, double depth) {
+        super(name, length);
+        this.depth = depth;
     }
 
+    public double getSailDepth() {
+        return depth;
+    }
+
+    @Override
     public String getDetails() {
-        // Format the boat details as "name:type:length"
-        return String.format("%s:%s:%.2f", this.name, this.type.toString().toLowerCase(), this.length);
+        return String.format("BOAT:%s:sailboat:%.0f:%.0f", name, length, depth);
+    }
+}
+
+class Motorboat extends Boat {
+    private double enginePower;
+
+    public Motorboat(String name, double length, double enginePower) {
+        super(name, length);
+        this.enginePower = enginePower;
+    }
+
+    public double getEnginePower() {
+        return enginePower;
+    }
+
+    @Override
+    public String getDetails() {
+        return String.format("BOAT:%s:motorboat:%.0f:%.0f", name, length, enginePower);
+    }
+}
+
+class Motorsailer extends Boat {
+    private double depth;
+    private double enginePower;
+
+    public Motorsailer(String name, double length, double depth, double enginePower) {
+        super(name, length);
+        this.depth = depth;
+        this.enginePower = enginePower;
+    }
+
+    public double getSailDepth() {
+        return depth;
+    }
+
+    public double getEnginePower() {
+        return enginePower;
+    }
+
+    @Override
+    public String getDetails() {
+        return String.format("BOAT:%s:motorsailer:%.0f:%.0f:%.0f", name, length, depth, enginePower);
+    }
+}
+
+class Canoe extends Boat {
+    public Canoe(String name, double length) {
+        super(name, length);
+    }
+
+    @Override
+    public String getDetails() {
+        return String.format("BOAT:%s:canoe:%.0f", name, length);
     }
 }
