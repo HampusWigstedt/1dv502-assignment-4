@@ -2,6 +2,8 @@ package assignment4;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -40,9 +42,6 @@ public class BoatClubInterface {
           listMembers();
           break;
         case 3:
-          viewMemberDetails();
-          break;
-        case 4:
           running = false;
           saveRegistry();
           break;
@@ -55,8 +54,7 @@ public class BoatClubInterface {
   private void printMenu() {
     System.out.println("1. Create new member");
     System.out.println("2. List all members");
-    System.out.println("3. View member details");
-    System.out.println("4. Quit");
+    System.out.println("3. Quit");
   }
 
   private void createMember() {
@@ -68,29 +66,77 @@ public class BoatClubInterface {
     registry.addMember(member);
   }
 
-  private void listMembers() {
+private void listMembers() {
+    int index = 1;
+    Map<Integer, String> memberMap = new HashMap<>();
     for (Member member : registry.getMembers()) {
-      System.out.println(member.getName() + " (" + member.getMemberId() + ")");
+        System.out.println(index + ". " + member.getName() + " (" + member.getMemberId() + ")");
+        memberMap.put(index, member.getMemberId());
+        index++;
     }
-  }
+    System.out.println(index + ". Return to main menu");
+    
+    System.out.print("Select a member by number or return to main menu: ");
+    int choice = scanner.nextInt();
+    scanner.nextLine(); // consume newline
+    
+    if (choice == index) {
+        return; // Return to main menu
+    } else if (memberMap.containsKey(choice)) {
+        String memberId = memberMap.get(choice);
+        memberMenu(memberId); // Handle member-specific actions in a new method
+    } else {
+        System.out.println("Invalid choice. Please try again.");
+    }
+}
 
-  private void viewMemberDetails() {
-    System.out.print("Enter member ID: ");
-    String memberId = scanner.nextLine();
+private void memberMenu(String memberId) {
+    Member member = registry.findMemberById(memberId);
+    if (member == null) {
+        System.out.println("Member not found.");
+        return;
+    }
+    boolean running = true;
+    while (running) {
+        System.out.println("1. View member details");
+        System.out.println("2. Edit member");
+        System.out.println("3. Delete member");
+        System.out.println("4. Return to list members");
+        
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+        
+        switch (choice) {
+            case 1:
+                viewMemberDetails(memberId);
+                break;
+            case 2:
+                // Implement editMember method
+                break;
+            case 3:
+                // Implement deleteMember method
+                break;
+            case 4:
+                running = false;
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+    }
+}
+
+// Modify viewMemberDetails to accept memberId as parameter
+private void viewMemberDetails(String memberId) {
     Member member = registry.findMemberById(memberId);
     if (member != null) {
-      System.out.println("Name: " + member.getName());
-      System.out.println("Email: " + member.getEmail());
-      System.out.println("Boats:");
-      // Add logic to list boats
-      // for (Boat boat : member.getBoats()) {
-      //   System.out.println(" - " + boat.getDetails());
-      // }
-      // Provide options to add/remove boats, delete member, etc.
+        System.out.println("Name: " + member.getName());
+        System.out.println("Email: " + member.getEmail());
+        System.out.println("Boats:");
+        // List boats logic
     } else {
-      System.out.println("Member not found.");
+        System.out.println("Member not found.");
     }
-  }
+}
 
   private void loadRegistry() {
     try {
