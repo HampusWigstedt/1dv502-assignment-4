@@ -16,9 +16,4 @@ public class BoatClubApp {
   public void start() {
     boatClubInterface.run();
   }
-
-  // public static void main(String[] args) {
-  //   BoatClubApp app = new BoatClubApp();
-  //   app.start();
-  // }
 }
