@@ -156,7 +156,7 @@ public class BoatClubInterface {
     while (running) {
       System.out.println("---------------------------------------------------------------");
       System.out.println("1. View member details");
-      System.out.println("2. Edit Boats");
+      System.out.println("2. Delete Boat");
       System.out.println("3. Delete member");
       System.out.println("4. Add new boat");
       System.out.println("5. Return to list members");
@@ -208,7 +208,7 @@ public class BoatClubInterface {
       System.out.println("This member has no boats.");
       return;
     }
-    System.out.println("Select a boat to delete:");
+    System.out.println("Select a boat to view details:");
     int index = 1;
     for (Boat boat : member.getBoats()) {
       System.out.println(index++ + ". " + boat.getName() + " (" + boat.getLength() + " meters)");
@@ -219,14 +219,20 @@ public class BoatClubInterface {
       System.out.println("Invalid choice. Please try again.");
       return;
     }
-    Boat boatToDelete = member.getBoats().get(choice - 1);
-    System.out.println("Are you sure you want to delete " + boatToDelete.getName() + "? (yes/no)");
-    String confirmation = scanner.nextLine();
-    if ("yes".equalsIgnoreCase(confirmation)) {
-      member.removeBoat(boatToDelete);
+    Boat selectedBoat = member.getBoats().get(choice - 1);
+    // Show boat details
+    System.out.println("Details of selected boat:");
+    System.out.println("Name: " + selectedBoat.getName());
+    System.out.println("Length: " + selectedBoat.getLength() + " meters");
+    System.out.println("Do you want to delete this boat or go back? (delete/back)");
+    String action = scanner.nextLine();
+    if ("delete".equalsIgnoreCase(action)) {
+      member.removeBoat(selectedBoat);
       System.out.println("Boat deleted successfully.");
+    } else if ("back".equalsIgnoreCase(action)) {
+      System.out.println("Going back to the previous menu.");
     } else {
-      System.out.println("Boat deletion cancelled.");
+      System.out.println("Invalid input. Going back to the previous menu.");
     }
   }
 
