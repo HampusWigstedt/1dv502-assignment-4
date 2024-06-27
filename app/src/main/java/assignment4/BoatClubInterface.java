@@ -156,7 +156,7 @@ public class BoatClubInterface {
     while (running) {
       System.out.println("---------------------------------------------------------------");
       System.out.println("1. View member details");
-      System.out.println("2. Delete Boat");
+      System.out.println("2. Boat Details / Delete boat");
       System.out.println("3. Delete member");
       System.out.println("4. Add new boat");
       System.out.println("5. Return to list members");
@@ -242,7 +242,6 @@ public class BoatClubInterface {
     if (member != null) {
       System.out.println("Name: " + member.getName());
       System.out.println("Email: " + member.getEmail());
-      System.out.println("Boats:");
       for (Boat boat : member.getBoats()) {
         String boatDetails = "Boat Name: " + boat.getName() + ", Length: " + boat.getLength();
         if (boat instanceof SailboatBoat) {
